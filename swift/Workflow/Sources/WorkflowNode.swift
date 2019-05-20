@@ -2,7 +2,7 @@ import ReactiveSwift
 import Result
 
 /// Manages a running workflow.
-final class WorkflowNode<WorkflowType: Workflow> {
+final internal class WorkflowNode<WorkflowType: Workflow> {
 
     /// Holds the current state of the workflow
     private var state: WorkflowType.State
@@ -62,6 +62,10 @@ final class WorkflowNode<WorkflowType: Workflow> {
                     state: state,
                     context: context)
         }
+    }
+
+    func enableEvents() {
+        subtreeManager.enableEvents()
     }
 
     /// Updates the workflow.

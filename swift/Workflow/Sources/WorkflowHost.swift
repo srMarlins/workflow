@@ -43,6 +43,7 @@ public final class WorkflowHost<WorkflowType: Workflow> {
 
         self.mutableRendering = MutableProperty(self.rootNode.render())
         self.rendering = Property(mutableRendering)
+        self.rootNode.enableEvents()
 
         debugger?.didEnterInitialState(snapshot: self.rootNode.makeDebugSnapshot())
 
@@ -58,6 +59,8 @@ public final class WorkflowHost<WorkflowType: Workflow> {
         if let outputEvent = output.outputEvent {
             outputEventObserver.send(value: outputEvent)
         }
+
+        rootNode.enableEvents()
 
         debugger?.didUpdate(
             snapshot: rootNode.makeDebugSnapshot(),
